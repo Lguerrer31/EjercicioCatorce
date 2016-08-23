@@ -5,6 +5,8 @@
  */
 package hotel;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author coste
@@ -32,6 +34,9 @@ public class EjercicioCatorce extends javax.swing.JFrame {
         txtD = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lblP = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        cmdB = new javax.swing.JButton();
+        cmdR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hotel");
@@ -43,6 +48,11 @@ public class EjercicioCatorce extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtD.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 60, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 120, 90));
@@ -56,6 +66,29 @@ public class EjercicioCatorce extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 110, 90));
 
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Botones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cmdB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cmdB.setText("Borrar");
+        cmdB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
+        cmdR.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cmdR.setText("Resolver");
+        cmdR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 260, 80));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,11 +97,51 @@ public class EjercicioCatorce extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBActionPerformed
+        // TODO add your handling code here:
+        txtD.setText("");
+        lblP.setText("");
+        txtD.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBActionPerformed
+
+    private void txtDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDKeyTyped
+
+    private void cmdRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRActionPerformed
+        // TODO add your handling code here:
+        String m;
+        double d, mo, r;
+        lblP.setText("");
+        if (txtD.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite el número de días", "Error", JOptionPane.ERROR_MESSAGE);
+            txtD.requestFocusInWindow();
+        } else {
+            d = Double.parseDouble(txtD.getText());
+            if (d == 0) {
+                JOptionPane.showMessageDialog(this, "No se puede colocar 0", "Error", JOptionPane.ERROR_MESSAGE);
+                txtD.requestFocusInWindow();
+            } else {
+                r = d - 1;
+                mo = (r * 200000) + 100000;
+                m = String.valueOf(mo);
+                lblP.setText(" $ " + m);
+            }
+        }
+    }//GEN-LAST:event_cmdRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,9 +179,12 @@ public class EjercicioCatorce extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdB;
+    private javax.swing.JButton cmdR;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblP;
     private javax.swing.JTextField txtD;
     // End of variables declaration//GEN-END:variables
